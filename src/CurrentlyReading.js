@@ -5,7 +5,9 @@ let CurrentlyReading= (props) => {
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">Currently Reading</h2>
-            <BookShelf books={props.books} />
+            <div className="bookshelf-books">
+                <BookShelf books={props.books} handleChange={props.handleChange} />
+            </div>
         </div>
     )
 }
