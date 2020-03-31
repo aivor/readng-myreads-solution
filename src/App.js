@@ -4,6 +4,9 @@ import './App.css';
 import ReadBooks from './ReadBooks';
 import CurrentlyReading from './CurrentlyReading';
 import WantToRead from './WantToRead';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import SearchBooks from './SearchBooks';
 
 class BooksApp extends React.Component {
   state = {
@@ -40,23 +43,30 @@ class BooksApp extends React.Component {
    const currentlyReading = this.state.books.filter( book => book.shelf === 'currentlyReading')
     return (
       <div className="app">
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <CurrentlyReading books={currentlyReading} handleChange={this.handleChange} />
-              <WantToRead books={wantToRead} handleChange={this.handleChange} />
-              <ReadBooks books={read} handleChange={this.handleChange} />
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
-          </div>
-        )}
+        <Route exact path='/' render={ ()=> (
+           <div className='list-books'>
+           <div className='list-books-title'>
+             <h1>MyReads</h1>
+           </div>
+           <div className='list-books-content'>
+             <div>
+               <CurrentlyReading books={currentlyReading} handleChange={this.handleChange}/>
+               <WantToRead books={wantToRead} handleChange={this.handleChange}/>
+               <ReadBooks books={read} handleChange={this.handleChange}/>
+             </div>
+           </div>
+         <div className="open-search">
+         <Link to='/search'><button>Add a book</button></Link>
+       </div>
+       </div>
+        )}/>
+
+         <Route path='/search' 
+           component={SearchBooks}
+          />
       </div>
     )
-  }
+        }    
 }
 
-export default BooksApp
+export default BooksApp;
