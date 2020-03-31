@@ -7,6 +7,7 @@ import WantToRead from './WantToRead';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import SearchBooks from './SearchBooks';
+import { debounce } from 'throttle-debounce';
 
 class BooksApp extends React.Component {
   state = {
@@ -36,7 +37,26 @@ class BooksApp extends React.Component {
       books:updatedBooks
     })
   }
+  resetBooks = ()=>{
+    this.setState({searchResults:[]})
+  }
+  searchBooks = debounce(300,false,query=>{
+    if(query.length === 0) {
+      return this.setState( {searchResults:[]})
+    }
 
+    if(query.length > 0) {
+     BooksAPI.search(query).then(books => {
+
+      if(books.error) {
+        this.setState( { searchResults: []})
+      } else {
+        this.setState({ searchResults:books})
+      }
+     });
+    }
+  }
+  )
   render() {
    const read = this.state.books.filter( book => book.shelf === 'read');
    const wantToRead = this.state.books.filter( book => book.shelf === 'wantToRead' );
