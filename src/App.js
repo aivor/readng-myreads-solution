@@ -17,6 +17,22 @@ class BooksApp extends React.Component {
       }))
     })
   }
+  handleChange = book => event => {
+    const shelf = event.target.value;
+    
+    BooksAPI.update(book,shelf);
+    
+    let updatedBooks = [];
+    updatedBooks = this.state.books.filter( b => b.id !== book.id)
+
+    if(shelf !== 'none') {
+      book.shelf = shelf;
+      updatedBooks = updatedBooks.concat(book)
+    }
+    this.setState({
+      books:updatedBooks
+    })
+  }
 
   render() {
    const read = this.state.books.filter( book => book.shelf === 'read');
@@ -51,9 +67,9 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <CurrentlyReading books={currentlyReading} />
-              <WantToRead books={wantToRead} />
-              <ReadBooks books={read} />
+              <CurrentlyReading books={currentlyReading} handleChange={this.handleChange} />
+              <WantToRead books={wantToRead} handleChange={this.handleChange} />
+              <ReadBooks books={read} handleChange={this.handleChange} />
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
