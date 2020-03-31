@@ -2,8 +2,6 @@ import React from 'react';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import ReadBooks from './ReadBooks';
-import wantToRead from './WantToRead';
-import currentlyReading from './CurrentlyReading'
 import CurrentlyReading from './CurrentlyReading';
 import WantToRead from './WantToRead';
 
