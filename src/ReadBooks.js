@@ -1,4 +1,4 @@
-import React from 'rect';
+import React from 'react';
 import BookShelf from './BookShelf';
 
 let ReadBooks= (props) => {
