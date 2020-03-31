@@ -12,7 +12,7 @@ import { debounce } from 'throttle-debounce';
 class BooksApp extends React.Component {
   state = {
     books: [],
-    showSearchPage: false
+    searchResults: []
   }
   componentDidMount() {
     BooksAPI.getAll().then(books => {
@@ -80,9 +80,15 @@ class BooksApp extends React.Component {
        </div>
        </div>
         )}/>
-
-         <Route path='/search' 
-           component={SearchBooks}
+          <Route path='/search' 
+           render={() => (
+             <SearchBooks 
+             searchBooks={this.searchBooks}
+             searchResults={this.state.searchResults}
+             resetBooks={this.resetBooks}
+             handleChange={this.handleChange}
+             books={this.state.books}/>
+           )}
           />
       </div>
     )

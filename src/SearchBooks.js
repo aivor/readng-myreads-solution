@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf';
+
 class SearchBooks extends Component {
     state = {
         query: ''
@@ -23,7 +24,7 @@ class SearchBooks extends Component {
         return(
             <div className="search-books">
                 <div className="search-books-bar">
-                    <Link to='/'><button className="close-search">Close</button></Link>
+                    <Link to='/'><button className="close-search" onClick={this.props.resetBooks}>Close</button></Link>
                     <div className="search-books-input-wrapper">
                         <input type="text" placeholder="Search by title or author"
                         value={this.state.query} onChange = { (event)=> {this.updateQuery(event.target.value)}} />
