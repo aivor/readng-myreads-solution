@@ -55,7 +55,7 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <CurrentlyReading books={currentlyReading} />
               <WantToRead books={wantToRead} />
-              <ReadBooks books={read}
+              <ReadBooks books={read} />
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
